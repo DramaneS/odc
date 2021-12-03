@@ -1,0 +1,45 @@
+package com.example.backend.service;
+
+import java.util.List;
+
+import com.example.backend.model.Activite;
+import com.example.backend.model.Participation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.backend.model.LogActivites;
+import com.example.backend.repository.LogActivitesRepository;
+
+@Service
+public class LogActivitesServiceImp implements LogActivitesService {
+@Autowired
+LogActivitesRepository logActivitesRepository;
+	@Override
+	public void addLogActivites(LogActivites act) {
+		logActivitesRepository.save(act);
+		
+	}
+
+	@Override
+	public List<LogActivites> listLogActivites() {
+		return logActivitesRepository.findAll();
+	}
+
+	@Override
+	public LogActivites listLogActivitebyid(Long id_LogActivites) {
+		return logActivitesRepository.findById(id_LogActivites).get();
+	}
+
+	@Override
+	public List<LogActivites> responsByActivite(Long IdActivite) {
+		return this.logActivitesRepository.responsByActivite(IdActivite);
+	}
+
+	@Override
+	public void deleteLogActivitesByid(Long id_LogActivites) {
+		logActivitesRepository.deleteById(id_LogActivites);
+	}
+
+
+
+}
